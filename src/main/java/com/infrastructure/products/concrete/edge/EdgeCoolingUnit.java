@@ -55,9 +55,11 @@ public class EdgeCoolingUnit implements CoolingUnit<EdgeFamily> {
     public void activateCooling(double heatOutputKw) {
         this.currentCoolingLoadKw = Math.min(heatOutputKw, maxCapacityKw);
         this.fanRpm = 2500 + (int) ((this.currentCoolingLoadKw / maxCapacityKw) * 3500.0);
-        this.status = (this.currentCoolingLoadKw > maxCapacityKw * 0.85)
-                ? CoolingStatus.ELEVATED_CHILL
-                : CoolingStatus.OPTIMAL;
+        if (this.status != CoolingStatus.EMERGENCY_DISSIPATION) {
+            this.status = (this.currentCoolingLoadKw > maxCapacityKw * 0.85)
+                    ? CoolingStatus.ELEVATED_CHILL
+                    : CoolingStatus.OPTIMAL;
+        }
     }
 
     @Override

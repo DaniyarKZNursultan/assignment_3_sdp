@@ -55,9 +55,11 @@ public class ExtremeCoolingUnit implements CoolingUnit<ExtremeFamily> {
     public void activateCooling(double heatOutputKw) {
         this.currentCoolingLoadKw = Math.min(heatOutputKw, maxCapacityKw);
         this.immersionPressureBar = 12.0 + (this.currentCoolingLoadKw / maxCapacityKw) * 10.0;
-        this.status = (this.currentCoolingLoadKw > maxCapacityKw * 0.9)
-                ? CoolingStatus.ELEVATED_CHILL
-                : CoolingStatus.OPTIMAL;
+        if (this.status != CoolingStatus.EMERGENCY_DISSIPATION) {
+            this.status = (this.currentCoolingLoadKw > maxCapacityKw * 0.9)
+                    ? CoolingStatus.ELEVATED_CHILL
+                    : CoolingStatus.OPTIMAL;
+        }
     }
 
     @Override
