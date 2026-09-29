@@ -4,6 +4,7 @@ import com.infrastructure.abstractfactory.EdgeInfrastructureFactory;
 import com.infrastructure.abstractfactory.EnterpriseInfrastructureFactory;
 import com.infrastructure.abstractfactory.ExtremeInfrastructureFactory;
 import com.infrastructure.abstractfactory.InfrastructureFactory;
+import com.infrastructure.abstractfactory.SpaceStationInfrastructureFactory;
 
 import java.util.Collections;
 import java.util.Map;
@@ -35,6 +36,8 @@ public class FactoryProvider {
         registerFactory(EnterpriseInfrastructureFactory.IDENTIFIER, EnterpriseInfrastructureFactory::new);
         registerFactory(EdgeInfrastructureFactory.IDENTIFIER, EdgeInfrastructureFactory::new);
         registerFactory(ExtremeInfrastructureFactory.IDENTIFIER, ExtremeInfrastructureFactory::new);
+        // Extension: 4th product family registered dynamically (OCP compliant)
+        registerFactory(SpaceStationInfrastructureFactory.IDENTIFIER, SpaceStationInfrastructureFactory::new);
     }
 
     private FactoryProvider() {}
